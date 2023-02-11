@@ -14,22 +14,19 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func main() {
-	mux := mux.NewRouter()
+func Handler(w http.ResponseWriter, r *http.Request){
+	fmt.Fprintln(w,"hola mundo...")
+}
 
+func Main() {
+	mux := mux.NewRouter()
 
 	 /* mail :=  models.EmailTemplate{Sender: "axcefornax@gmail.com",Subject: "prueba email",Body: "este es un email de prueba"}
 
 	 sendMail := models.Email{}
 
 	 sendMail.SendMail(&mail) */
-
-
-
-	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request){
-		fmt.Fprintln(w,"hola mundo...")
-	}).Methods("GET")
-
+	mux.HandleFunc("/", Handler).Methods("GET")
 	mux.HandleFunc("/api/users/{email}", handler.GetUserByEmail).Methods("GET").Name("users")
 	mux.HandleFunc("/api/login", handlerlogin.Login).Methods("POST")
 	mux.HandleFunc("/api/register/users", handler.RegisterUser).Methods("POST")
