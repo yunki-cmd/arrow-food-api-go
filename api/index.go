@@ -1,7 +1,6 @@
 package handler
 
 import (
-	handler "arrow_food_api/controller"
 	"context"
 	"fmt"
 	"log"
@@ -26,10 +25,6 @@ func Main() {
 
 	 sendMail.SendMail(&mail) */
 	mux.HandleFunc("/", Handler).Methods("GET")
-	mux.HandleFunc("/api/users/{email}", handler.GetUserByEmail).Methods("GET").Name("users")
-	mux.HandleFunc("/api/login", handler.Login).Methods("POST")
-	mux.HandleFunc("/api/register/users", handler.RegisterUser).Methods("POST")
-	mux.HandleFunc("/api/users/delete/{email}", handler.DeleteUser).Methods("DELETE")
 
 	server := &http.Server{
 		Handler: mux,

@@ -9,9 +9,19 @@ import (
 	"io"
 	"net/http"
 	"strings"
+
+	"github.com/gorilla/mux"
 )
 
 const baseUrl ="/api/users/"
+
+func GetRouterUser() *mux.Router {
+	r := mux.NewRouter()
+	r.HandleFunc("/api/users/{email}", GetUserByEmail).Methods("GET").Name("users")
+	r.HandleFunc("/api/register/users", RegisterUser).Methods("POST")
+	r.HandleFunc("/api/users/delete/{email}", DeleteUser).Methods("DELETE")
+	return r
+}
 
 func GetUserByEmail(rw http.ResponseWriter, r *http.Request) {
 	response := &models.Response{}

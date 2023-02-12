@@ -7,12 +7,20 @@ import (
 	"io"
 	"net/http"
 	"strings"
+
+	"github.com/gorilla/mux"
 )
 
 
 type UserLogin struct {
 	Nombre string `json:"nombre"`
 	Password string `json:"password"`
+}
+
+func GetRouter() *mux.Router {
+	r := mux.NewRouter()
+	r.HandleFunc("/api/login", Login).Methods("POST")
+	return r
 }
 
 func Login(rw http.ResponseWriter, r *http.Request) {
