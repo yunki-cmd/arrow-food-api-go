@@ -19,7 +19,7 @@ type UserLogin struct {
 
 func GetRouter() *mux.Router {
 	r := mux.NewRouter()
-	r.HandleFunc("/api/login", Login).Methods("POST")
+	r.HandleFunc("/", Login).Methods("POST")
 	return r
 }
 
