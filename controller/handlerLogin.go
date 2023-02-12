@@ -1,4 +1,4 @@
-package handlerlogin
+package handler
 
 import (
 	"arrow_food_api/models"
