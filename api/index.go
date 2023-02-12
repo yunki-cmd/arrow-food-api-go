@@ -1,6 +1,8 @@
 package handler
 
 import (
+	handlerLogin "arrow_food_api/controller/login"
+	handlerUser "arrow_food_api/controller/user"
 	"context"
 	"fmt"
 	"log"
@@ -12,19 +14,13 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func Handler(w http.ResponseWriter, r *http.Request){
-	fmt.Fprintln(w,"hola mundo...")
-}
-
 func Main() {
 	mux := mux.NewRouter()
 
-	 /* mail :=  models.EmailTemplate{Sender: "axcefornax@gmail.com",Subject: "prueba email",Body: "este es un email de prueba"}
-
-	 sendMail := models.Email{}
-
-	 sendMail.SendMail(&mail) */
-	mux.HandleFunc("/", Handler).Methods("GET")
+	mux.HandleFunc("/api/user/login", handlerLogin.Login).Methods("POST")
+	mux.HandleFunc("/api/users/{email}", handlerUser.GetUserByEmail).Methods("GET")
+	mux.HandleFunc("/api/register/users", handlerUser.RegisterUser).Methods("POST")
+	mux.HandleFunc("/api/users/delete/{email}", handlerUser.DeleteUser).Methods("DELETE")
 
 	server := &http.Server{
 		Handler: mux,
